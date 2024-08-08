@@ -4,8 +4,8 @@
   "description": "ui5_easy_use",
   "main": "index.js",
   "scripts": {
-    "test": "c-mvc",
-    "c-mvc2": "node create_auto_files/main.js"
+    "postinstall": "node auto_add_json.js",
+    "c-mvc": "node create_auto_files/main.js"
   },
   "keywords": [
     "ui5"
