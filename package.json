@@ -1,0 +1,15 @@
+{
+  "name": "ui5_easy_use",
+  "version": "1.0.0",
+  "description": "ui5_easy_use",
+  "main": "index.js",
+  "scripts": {
+    "test": "c-mvc",
+    "c-mvc2": "node create_auto_files/main.js"
+  },
+  "keywords": [
+    "ui5"
+  ],
+  "author": "ZYBinjabi",
+  "license": "ISC"
+}
