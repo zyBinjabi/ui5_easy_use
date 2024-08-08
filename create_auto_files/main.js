@@ -17,18 +17,19 @@ class FileManager {
         this.fileName = fileName;
         this.isRoute = isRoute;
 
-        this.controllerPath = path.join(__dirname, '../webapp/controller');
-        this.viewPath = path.join(__dirname, '../webapp/view'); // Path for view directory
-        this.fragmentPath = path.join(__dirname, '../webapp/fragment'); // Path for view directory
-        this.mainFragmentPath = path.join(__dirname, '../webapp/fragment/mainFragment');
-        this.ModelPath = path.join(__dirname, '../webapp/model'); // Path for view directory
+        // Use a configurable base path or environment variable
+        const basePath = process.cwd(); // Assuming you want to use the current working directory
 
-        this.manifestPath = path.join(__dirname, '../webapp/manifest.json');
-        this.navListPath = path.join(__dirname, '../webapp/model/navList.json');
-
-        this.appPath = path.join(__dirname, '../webapp/view/App.view.xml');
-        this.sideNavigationFragmentPath = path.join(__dirname, '../webapp/fragment/mainFragment/NavigationList.fragment.xml');
-        this.navigationListFragmentPath = path.join(__dirname, '../webapp/fragment/mainFragment/SideNavigation.fragment.xml');
+        this.controllerPath = path.join(basePath, 'webapp/controller');
+        this.viewPath = path.join(basePath, 'webapp/view');
+        this.fragmentPath = path.join(basePath, 'webapp/fragment');
+        this.mainFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment');
+        this.ModelPath = path.join(basePath, 'webapp/model');
+        this.manifestPath = path.join(basePath, 'webapp/manifest.json');
+        this.navListPath = path.join(basePath, 'webapp/model/navList.json');
+        this.appPath = path.join(basePath, 'webapp/view/App.view.xml');
+        this.sideNavigationFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment/NavigationList.fragment.xml');
+        this.navigationListFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment/SideNavigation.fragment.xml');
     }
 
     async getManifestJson(manifestPath) {
