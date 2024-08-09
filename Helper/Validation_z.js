@@ -1,22 +1,40 @@
+// Usageg ---------------------------------------------------> 
+
+// startValidation: function (oPayload) {
+//     let fieldsName = Object.keys(this.getObj());
+//     let requiredList = fieldsName.filter(field => field);
+//     const rulesArrName = [
+//         { arr: requiredList, name: 'required' },
+//         { arr: requiredList, name: 'max-10' }
+//     ];
+
+//     let {isErr, setvalueStateValues} = this.validation_z.startValidation(fieldsName, rulesArrName, oPayload)
+//     console.log(isErr)
+//     this.getView().setModel(new JSONModel(setvalueStateValues), 'StateErrModel');
+//     console.log(this.getView().getModel('StateErrModel').getData());
+// },
+
+//                       ---------------------------------------------------> 
+
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel"
 ], function (Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("practice.controller/Helper/Validation_z", {
+    return Controller.extend("ui5_easy_use.Helper.Validation_z", {
 
         onInit: function () {
             // this._view = this.getView();
         },
-        
+
         startValidation: function (fieldsName, rulesArrName, oPayload) {
             // fieldsName, rulesArrName, oPayload
             let rules = this.setRules(fieldsName, rulesArrName);
             let errs = this.validateFields(oPayload, rules);
             let setvalueStateValues = this.setvalueState(fieldsName, errs);
-            let isErr = errs.length !==0
-            return {isErr, setvalueStateValues}
+            let isErr = errs.length !== 0
+            return { isErr, setvalueStateValues }
         },
 
         setRules: function (fieldsName, rulesArrName) {

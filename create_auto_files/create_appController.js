@@ -1,12 +1,14 @@
 // content.js
 module.exports = (fileName, appId) => {
-    return `sap.ui.define(
+  return `sap.ui.define(
         [
           "sap/ui/core/mvc/Controller",
           "sap/ui/core/UIComponent",
           "sap/tnt/ToolPage",
           "sap/ui/core/routing/Router",
-          "sap/ui/core/Fragment"
+          "sap/ui/core/Fragment",
+          "sap/ui/core/Configuration"
+
       
       
         ],
@@ -14,16 +16,27 @@ module.exports = (fileName, appId) => {
         UIComponent,
         ToolPage,
         Router,
-        Fragment) {
+        Fragment,
+        Configuration) {
           "use strict";
       
           return Controller.extend("${appId}.controller.App", {
             onInit: function () {
             },
       
-            onClickLight: function (ev) {
-              // ReusedHooks.onClickLight());
+            onToggleTheme: function () {
+              if (this.isDarkMode) {
+                Configuration.setTheme("sap_horizon"); // Set to normal theme
+                this.byId("themeToggleButton").setTooltip("Switch to Dark Mode");
+                this.byId("themeToggleButton").setIcon("sap-icon://light-mode");
+              } else {
+                Configuration.setTheme("sap_horizon_dark"); // Set to dark theme
+                this.byId("themeToggleButton").setTooltip("Switch to Light Mode");
+                this.byId("themeToggleButton").setIcon("sap-icon://dark-mode");
+              }
+              this.isDarkMode = !this.isDarkMode;
             },
+
       
             onMenuButtonPress: function () {
               var toolPage = this.byId('toolPage');

@@ -12,7 +12,7 @@ module.exports = (fileName, appId) => {
             <tnt:header>
                 <ff:ShellBar title="${appId}" secondTitle="" showMenuButton="true" homeIcon="./image/main_logo.png" homeIconTooltip="Main Logo" menuButtonPressed="onMenuButtonPress" showNotifications="true" notificationsPressed="" notificationsNumber="4" id="idImage">
                     <ff:additionalContent>
-                        <OverflowToolbarButton press="" tooltip="Light Mode" icon="sap-icon://light-mode" />
+                        <OverflowToolbarButton press="onToggleTheme" tooltip="Switch Theme" icon="sap-icon://light-mode" id="themeToggleButton"/>
                         <OverflowToolbarButton press="" tooltip="Start tour to understand the functionality" icon="sap-icon://learning-assistant"/>
                     </ff:additionalContent>
                     <ff:profile>
