@@ -163,7 +163,7 @@ const args = process.argv.slice(2); // Remove the first two elements (node and s
 const fileName = args[0];
 const isRoute = args[1];
 
-const fileManager = new FileManager(fileName, isRoute);
+const fileManager = new FileManager(fileName.split('-')[0], isRoute);
 if (fileName == 'init') {
     // Split the route by the hyphen ('-')
     let [spl0, spl1] = isRoute.split('-');// FOW-HLP

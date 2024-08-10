@@ -4,8 +4,8 @@ module.exports = (fileName, appId) => {
   [
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "${appId}/Helper/CRUD_z",
-    "${appId}/Helper/Validation_z",
+    "${appId}/Controller/Helper/CRUD_z",
+    "${appId}/Controller/Helper/Validation_z",
 
 
   ],

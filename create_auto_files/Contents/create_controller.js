@@ -10,7 +10,7 @@ module.exports = (fileName, appId, isHelperFuns = false) => {
   let setBusy = ""
 
   if (isHelperFuns) {
-    parent = `${appId}/Controller/Helper/BaseController`
+    parent = `"${appId}/Controller/Helper/BaseController"`
     isInit = `BaseController.prototype.onInit.apply(this,[]);`
 
     isModelDfulate = ` 
