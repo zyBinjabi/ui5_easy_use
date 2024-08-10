@@ -2,13 +2,13 @@ const fs = require('fs').promises;
 const path = require('path');
 const { exit } = require('process');
 
-const getContent = require('./Contents/create_controller');
-const getViewContent = require('./Contents/create_view'); // Import the function to get view content
 
-const getAppViewContent = require('./Contents/create_appView');
-const getAppControllerContent = require('./Contents/create_appController');
-const getNavigationListFragmentContent = require('./Contents/create_NavigationListFragment');
-const getSideNavigationFragmentContent = require('./Contents/create_SideNavigationFragment');
+const contentsPath = path.join(__dirname, 'Contents');
+const modules = {};
+fs.readdirSync(contentsPath).forEach((file) => {
+    modules[path.basename(file, '.js')] = require(path.join(contentsPath, file));
+});
+
 
 const { readJsonFile, updateAndWriteJsonFile } = require('./RWJSON');
 
@@ -81,11 +81,11 @@ class FileManager {
             await this.ensureDirectoryExists(this.viewPath);
             await this.ensureDirectoryExists(this.mainFragmentPath);
 
-            const appViewContent = getAppViewContent("App", appId);
-            const appControllerContent = getAppControllerContent("App", appId);
+            const appViewContent = modules['create_appView']("App", appId);
+            const appControllerContent = modules['create_appController']("App", appId);
 
-            const navigationListFragmentContentContent = getNavigationListFragmentContent("INIT", appId);
-            const sideNavigationFragmentContentContent = getSideNavigationFragmentContent("INIT", appId);
+            const navigationListFragmentContentContent = modules['create_NavigationListFragment']("INIT", appId);
+            const sideNavigationFragmentContentContent = modules['create_SideNavigationFragment']("INIT", appId);
 
             await this.createFile(appViewFilePath, appViewContent, 'View', isForceOverWrite);
             await this.createFile(appControllerFilePath, appControllerContent, 'Controller', isForceOverWrite);
@@ -122,8 +122,8 @@ class FileManager {
             // let fileNmaeWithSpace = this.insertSpaces(this.fileName);
             let fileNmaeWithSpace = this.fileName;
 
-            const controllerContent = getContent(fileNmaeWithSpace, appId);
-            const viewContent = getViewContent(fileNmaeWithSpace, appId);
+            const controllerContent = modules['create_controller'](fileNmaeWithSpace, appId);
+            const viewContent = modules['create_view'](fileNmaeWithSpace, appId);
 
             await this.createFile(controllerFilePath, controllerContent, 'Controller');
             await this.createFile(viewFilePath, viewContent, 'View');
