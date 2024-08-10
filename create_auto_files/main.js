@@ -2,13 +2,13 @@ const fs = require('fs').promises;
 const path = require('path');
 const { exit } = require('process');
 
-const getContent = require('./create_controller');
-const getViewContent = require('./create_view'); // Import the function to get view content
+const getContent = require('./Contents/create_controller');
+const getViewContent = require('./Contents/create_view'); // Import the function to get view content
 
-const getAppViewContent = require('./create_appView');
-const getAppControllerContent = require('./create_appController');
-const getNavigationListFragmentContent = require('./create_NavigationListFragment');
-const getSideNavigationFragmentContent = require('./create_SideNavigationFragment');
+const getAppViewContent = require('./Contents/create_appView');
+const getAppControllerContent = require('./Contents/create_appController');
+const getNavigationListFragmentContent = require('./Contents/create_NavigationListFragment');
+const getSideNavigationFragmentContent = require('./Contents/create_SideNavigationFragment');
 
 const { readJsonFile, updateAndWriteJsonFile } = require('./RWJSON');
 

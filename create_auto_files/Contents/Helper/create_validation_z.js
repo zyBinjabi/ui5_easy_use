@@ -1,4 +1,4 @@
-// Usageg ---------------------------------------------------> 
+// Usageg --------------------------------------------------->
 
 // startValidation: function (oPayload) {
 //     let fieldsName = Object.keys(this.getObj());
@@ -14,15 +14,15 @@
 //     console.log(this.getView().getModel('StateErrModel').getData());
 // },
 
-//                       ---------------------------------------------------> 
-
-sap.ui.define([
+// content.js
+module.exports = (fileName, appId) => {
+    return `sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel"
 ], function (Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("ui5_easy_use.Helper.Validation_z", {
+    return Controller.extend("${appId}.Helper.Validation_z", {
 
         onInit: function () {
             // this._view = this.getView();
@@ -127,3 +127,5 @@ sap.ui.define([
         }
     });
 });
+`;
+};
