@@ -1,11 +1,11 @@
 // content.js
 module.exports = (fileName, appId) => {
-    return `sap.ui.define(
+  return `sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "./Helper/CRUD_z",
-    "./Helper/Validation_z",
+    "${appId}/Helper/CRUD_z",
+    "${appId}/Helper/Validation_z",
 
 
   ],

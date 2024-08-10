@@ -102,10 +102,9 @@ class FileManager {
             await updateAndWriteJsonFile("Home", this.manifestPath, this.navListPath);
 
             if (isHelperFuns) {
-
-                const baseControllerPath = path.join(this.helperPath, `create_base_controller.js`);
-                const createCrudPath = path.join(this.helperPath, `create_crud_z.js`);
-                const createValidationPath = path.join(this.helperPath, `create_validation_z.js`);
+                const baseControllerPath = path.join(this.helperPath, `BaseController.js`);
+                const createCrudPath = path.join(this.helperPath, `CRUD_z.js`);
+                const createValidationPath = path.join(this.helperPath, `Validation_z.js`);
 
                 await this.ensureDirectoryExists(this.helperPath);
 
@@ -125,7 +124,7 @@ class FileManager {
 
     }
 
-    async main() {
+    async main(isForceOverWrite, isHelperFuns) {
         if (!this.fileName) {
             console.error('Please write the file name.');
             process.exit(1); // Exit the script with an error code
@@ -144,11 +143,11 @@ class FileManager {
             // let fileNmaeWithSpace = this.insertSpaces(this.fileName);
             let fileNmaeWithSpace = this.fileName;
 
-            const controllerContent = getContent(fileNmaeWithSpace, appId);
+            const controllerContent = getContent(fileNmaeWithSpace, appId, isHelperFuns);
             const viewContent = getViewContent(fileNmaeWithSpace, appId);
 
-            await this.createFile(controllerFilePath, controllerContent, 'Controller');
-            await this.createFile(viewFilePath, viewContent, 'View');
+            await this.createFile(controllerFilePath, controllerContent, 'Controller', isForceOverWrite);
+            await this.createFile(viewFilePath, viewContent, 'View', isForceOverWrite);
 
             if (this.isRoute === "r") {
                 await updateAndWriteJsonFile(fileNmaeWithSpace, this.manifestPath, this.navListPath);
@@ -167,12 +166,17 @@ const isRoute = args[1];
 const fileManager = new FileManager(fileName, isRoute);
 if (fileName == 'init') {
     // Split the route by the hyphen ('-')
-    let [spl0, spl1] = isRoute.split('-');
+    let [spl0, spl1] = isRoute.split('-');// FOW-HLP
 
     let isForceOverWrite = spl0 === 'FOW' ? true : false
     let isHelperFuns = spl1 === 'HLP' ? true : false
 
     fileManager.initApp(isForceOverWrite, isHelperFuns)
 } else {
-    fileManager.main();
+    let [spl0, spl1, spl2] = fileName.split('-'); // PageName-FOW-HLP
+
+    let isForceOverWrite = spl1 === 'FOW' ? true : false
+    let isHelperFuns = spl2 === 'HLP' ? true : false
+
+    fileManager.main(isForceOverWrite, isHelperFuns);
 }

@@ -29,8 +29,15 @@ module.exports = (fileName, appId) => {
                 // oBusyDialog.open()
 
                 let name = ''
-                var keys = name !== '' ? `/ ${ endPoint } (Id = '${id}', Name = '${name}')` : ` / ${ endPoint } ('${id}')`
-                var path = id === '' ? `/ ${ endPoint } ` : keys;
+
+                var keys = name !== '' 
+                    ? "/ " + endPoint + " (Id = '" + id + "', Name = '" + name + "')" 
+                    : "/ " + endPoint + " ('" + id + "')";
+
+                var path = id === '' 
+                    ? "/ " + endPoint 
+                    : keys;
+
                 // console.log('res: ', path)
                 var oFilter;
 
@@ -91,7 +98,10 @@ module.exports = (fileName, appId) => {
 
             update_record: async function (endPoint, oPayload, id) {
                 let name = '';
-                let path = name === '' ? `/ ${ endPoint } ('${id}')` : ` / ${ endPoint } (Id = '${id}', Name = '${name}')`
+                let path = name === '' 
+                    ? "/ " + endPoint + " ('" + id + "')"
+                    : "/ " + endPoint + " (Id = '" + id + "', Name = '" + name + "')";
+
                 try {
 
                     var res = await new Promise((resolve, reject) => {
@@ -118,7 +128,10 @@ module.exports = (fileName, appId) => {
                 let name = ''
                 try {
                     var res = await new Promise((resolve, reject) => {
-                        let path = name === '' ? `/ ${ endPoint } ('${id}')` : ` / ${ endPoint } (Id = '${id}', Name = '${name}')`
+                    let path = name === '' 
+                        ? "/ " + endPoint + " ('" + id + "')"
+                        : "/ " + endPoint + " (Id = '" + id + "', Name = '" + name + "')";
+                        
                         this.oModel.remove(path, {
                             success: function (res) {
                                 resolve(res); // Resolve the promise with the response
