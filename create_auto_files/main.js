@@ -2,13 +2,17 @@ const fs = require('fs').promises;
 const path = require('path');
 const { exit } = require('process');
 
+const getContent = require('./Contents/create_controller');
+const getViewContent = require('./Contents/create_view');
 
-const contentsPath = path.join(__dirname, 'Contents');
-const modules = {};
-fs.readdirSync(contentsPath).forEach((file) => {
-    modules[path.basename(file, '.js')] = require(path.join(contentsPath, file));
-});
+const getAppViewContent = require('./Contents/create_appView');
+const getAppControllerContent = require('./Contents/create_appController');
+const getNavigationListFragmentContent = require('./Contents/create_NavigationListFragment');
+const getSideNavigationFragmentContent = require('./Contents/create_SideNavigationFragment');
 
+const getCreate_base_controller = require('./Contents/Helper/create_base_controller');
+const getCeate_crud_z = require('./Contents/Helper/create_crud_z');
+const getCreate_validation_z = require('./Contents/Helper/create_validation_z');
 
 const { readJsonFile, updateAndWriteJsonFile } = require('./RWJSON');
 
@@ -20,16 +24,16 @@ class FileManager {
         // Use a configurable base path or environment variable
         const basePath = process.cwd(); // Assuming you want to use the current working directory
 
+        this.manifestPath = path.join(basePath, 'webapp/manifest.json');
+        this.ModelPath = path.join(basePath, 'webapp/model');
         this.controllerPath = path.join(basePath, 'webapp/controller');
+        this.helperPath = path.join(basePath, 'webapp/controller/Helper');
         this.viewPath = path.join(basePath, 'webapp/view');
         this.fragmentPath = path.join(basePath, 'webapp/fragment');
         this.mainFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment');
-        this.ModelPath = path.join(basePath, 'webapp/model');
-        this.manifestPath = path.join(basePath, 'webapp/manifest.json');
+
         this.navListPath = path.join(basePath, 'webapp/model/navList.json');
-        this.appPath = path.join(basePath, 'webapp/view/App.view.xml');
-        this.sideNavigationFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment/NavigationList.fragment.xml');
-        this.navigationListFragmentPath = path.join(basePath, 'webapp/fragment/mainFragment/SideNavigation.fragment.xml');
+
     }
 
     async getManifestJson(manifestPath) {
@@ -67,7 +71,7 @@ class FileManager {
         return str.replace(/([a-z])([A-Z])/g, '$1 $2');
     }
 
-    async initApp(isForceOverWrite) {
+    async initApp(isForceOverWrite, isHelperFuns) {
         try {
             let manifestJson = await this.getManifestJson(this.manifestPath);
             const appId = manifestJson['sap.app']['id'];
@@ -81,11 +85,11 @@ class FileManager {
             await this.ensureDirectoryExists(this.viewPath);
             await this.ensureDirectoryExists(this.mainFragmentPath);
 
-            const appViewContent = modules['create_appView']("App", appId);
-            const appControllerContent = modules['create_appController']("App", appId);
+            const appViewContent = getAppViewContent("App", appId);
+            const appControllerContent = getAppControllerContent("App", appId);
 
-            const navigationListFragmentContentContent = modules['create_NavigationListFragment']("INIT", appId);
-            const sideNavigationFragmentContentContent = modules['create_SideNavigationFragment']("INIT", appId);
+            const navigationListFragmentContentContent = getNavigationListFragmentContent("INIT", appId);
+            const sideNavigationFragmentContentContent = getSideNavigationFragmentContent("INIT", appId);
 
             await this.createFile(appViewFilePath, appViewContent, 'View', isForceOverWrite);
             await this.createFile(appControllerFilePath, appControllerContent, 'Controller', isForceOverWrite);
@@ -96,6 +100,24 @@ class FileManager {
             await this.createFile(this.navListPath, `{"navigation": []}`, 'Model');
 
             await updateAndWriteJsonFile("Home", this.manifestPath, this.navListPath);
+
+            if (isHelperFuns) {
+
+                const baseControllerPath = path.join(this.helperPath, `create_base_controller.js`);
+                const createCrudPath = path.join(this.helperPath, `create_crud_z.js`);
+                const createValidationPath = path.join(this.helperPath, `create_validation_z.js`);
+
+                await this.ensureDirectoryExists(this.helperPath);
+
+                const base_controllerContent = getCreate_base_controller("INIT", appId);
+                const crud_zContent = getCeate_crud_z("INIT", appId);
+                const validation_zContent = getCreate_validation_z("INIT", appId);
+
+                await this.createFile(baseControllerPath, base_controllerContent, 'Controller/Helper', isForceOverWrite);
+                await this.createFile(createCrudPath, crud_zContent, 'Controller/Helper', isForceOverWrite);
+                await this.createFile(createValidationPath, validation_zContent, 'Controller/Helper', isForceOverWrite);
+
+            }
 
         } catch (error) {
             console.error('Error in main function:', error);
@@ -122,8 +144,8 @@ class FileManager {
             // let fileNmaeWithSpace = this.insertSpaces(this.fileName);
             let fileNmaeWithSpace = this.fileName;
 
-            const controllerContent = modules['create_controller'](fileNmaeWithSpace, appId);
-            const viewContent = modules['create_view'](fileNmaeWithSpace, appId);
+            const controllerContent = getContent(fileNmaeWithSpace, appId);
+            const viewContent = getViewContent(fileNmaeWithSpace, appId);
 
             await this.createFile(controllerFilePath, controllerContent, 'Controller');
             await this.createFile(viewFilePath, viewContent, 'View');
@@ -141,10 +163,16 @@ class FileManager {
 const args = process.argv.slice(2); // Remove the first two elements (node and script name)
 const fileName = args[0];
 const isRoute = args[1];
+
 const fileManager = new FileManager(fileName, isRoute);
 if (fileName == 'init') {
-    let isForceOverWrite = isRoute === 'FOW' ? true : false
-    fileManager.initApp(isForceOverWrite)
+    // Split the route by the hyphen ('-')
+    let [spl0, spl1] = isRoute.split('-');
+
+    let isForceOverWrite = spl0 === 'FOW' ? true : false
+    let isHelperFuns = spl1 === 'HLP' ? true : false
+
+    fileManager.initApp(isForceOverWrite, isHelperFuns)
 } else {
     fileManager.main();
 }
