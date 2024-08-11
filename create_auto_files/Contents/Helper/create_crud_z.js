@@ -7,7 +7,7 @@ module.exports = (fileName, appId) => {
     function (Controller) {
         "use strict";
 
-        return Controller.extend("${appId}.Helper.CRUD_z", {
+        return Controller.extend("${appId}.controller.Helper.CRUD_z", {
             // Constructor function to store the reference of the current controller
             constructor: function (currentController) {
                 Controller.apply(this, currentController);

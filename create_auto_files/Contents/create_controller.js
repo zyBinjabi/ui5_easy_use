@@ -10,11 +10,11 @@ module.exports = (fileName, appId, isHelperFuns = false) => {
   let setBusy = ""
 
   if (isHelperFuns) {
-    parent = `"${appId}/Controller/Helper/BaseController"`
+    parent = `"${appId}/controller/Helper/BaseController"`
     isInit = `BaseController.prototype.onInit.apply(this,[]);`
 
     isModelDfulate = ` 
-         this.pageName = 'Settings'
+         this.pageName = '${fileName}'
          this.mainFromModel = 'mainFormModel'
          this.mainFormErrModel = "mainFormErrModel"
          this.mainTableId = 'mainTableId'+ this.pageName

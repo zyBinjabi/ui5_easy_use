@@ -12,7 +12,7 @@ module.exports = (fileName, appId) => {
   function (BaseController, JSONModel, CRUD_z, Validation_z) {
     "use strict";
 
-    return BaseController.extend("${appId}.Helper.BaseController", {
+    return BaseController.extend("${appId}.controller.Helper.BaseController", {
       onInit: function () {
         this.crud_z = new CRUD_z(this)
         this.mainOModel = this.crud_z.oModel;

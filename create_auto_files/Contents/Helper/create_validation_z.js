@@ -22,7 +22,7 @@ module.exports = (fileName, appId) => {
 ], function (Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("${appId}.Helper.Validation_z", {
+    return Controller.extend("${appId}.controller.Helper.Validation_z", {
 
         onInit: function () {
             // this._view = this.getView();
