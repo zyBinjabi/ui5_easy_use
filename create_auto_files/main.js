@@ -23,6 +23,7 @@ class FileManager {
 
         // Use a configurable base path or environment variable
         const basePath = process.cwd(); // Assuming you want to use the current working directory
+        this.webapp = path.join(basePath, 'webapp');
 
         this.manifestPath = path.join(basePath, 'webapp/manifest.json');
         this.ModelPath = path.join(basePath, 'webapp/model');

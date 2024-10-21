@@ -1,15 +1,16 @@
 {
   "name": "ui5_easy_use",
-  "version": "1.1.2",
+  "version": "1.2.1",
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
     "c-mvc": "node create_auto_files/main.js",
+    "t": "node create_auto_files/main2.js",
     "postinstall": "node auto_add_json.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zyBinjabi/ui5_easy_use.git"
+    "url": "git+https://github.com/zyBinjabi/ui5_easy_use.git"
   },
   "keywords": [
     "ui5",
@@ -18,5 +19,11 @@
   ],
   "author": "ZYBinjabi",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "inquirer": "^12.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/zyBinjabi/ui5_easy_use/issues"
+  },
+  "homepage": "https://github.com/zyBinjabi/ui5_easy_use#readme"
 }
