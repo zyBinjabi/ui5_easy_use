@@ -1,11 +1,11 @@
 class XMLi18nTranslator {
-    constructor(xmlString, pageName = '', attributes = ["title", "text", 'tooltip']) {
+    constructor(xmlString, pageName = '', attributes = ["title", "text", 'tooltip', "label", "placeholder"]) {
         this.attributes = attributes;
         this.xmlString = xmlString;
         this.pageName = pageName;
         this.foundAttributes = [];
 
-        // Find and replace attributes in the XML
+        // Find and replace attributes in the XMLa
         this.replaceAttributesWithI18n();
         this.generateI18nProperties();
     }
@@ -19,7 +19,7 @@ class XMLi18nTranslator {
                 const value = match[1]; // The value of the matched attribute
 
                 // Skip the attribute if it already contains i18n binding
-                if (value.includes('{i18n>')) {
+                if (value.includes('{i18n>') || value.includes('{')) {
                     continue;
                 }
 
@@ -42,31 +42,26 @@ class XMLi18nTranslator {
 
     // Method to create i18n binding string
     createI18nBinding(value) {
-        return value.includes(' ')
-            ? `{i18n>${value.toLowerCase().replace(/\s+/g, '_')}_i18n_${this.pageName}}`
-            : `{i18n>${value.toLowerCase()}_i18n_${this.pageName}}`;
-    }
-
-    // Method to generate i18n properties content
-    // generateI18nProperties() {
-    //     this.generateI18nPropertiesX = this.foundAttributes.map(attr => {
-    //         return `${attr.i18nBinding.replace(/{i18n>|}/g, '')}=${attr.value.trim()}`.trim();
-    //     }).join('\n');
-    // }
-
-    generateI18nProperties() {
-        // Function to sanitize i18n variable names
         const sanitizeI18nName = (name) => {
             return name
                 .toLowerCase()                          // Convert to lowercase
-                .replace(/[^a-z0-9_]/g, '_')           // Replace non-alphanumeric characters with underscores
+                .replace(/[^a-z0-9_]/g, '_')            // Replace non-alphanumeric characters with underscores
                 .replace(/_{2,}/g, '_')                 // Replace multiple underscores with a single underscore
-                .replace(/^_|_$/g, '');                 // Remove leading or trailing underscores
+                .replace(/^_|_$/g, '')                  // Remove leading or trailing underscores
+                .slice(0, 20);                          // Limit the result to 20 characters
         };
 
+        // Use the sanitized and limited value for the binding key
+        const sanitizedValue = sanitizeI18nName(value);
+
+        return `{i18n>${this.pageName.toLowerCase()}_${sanitizedValue}}`;
+    }
+
+
+    generateI18nProperties() {
         this.generateI18nPropertiesX = this.foundAttributes.map(attr => {
-            const sanitizedName = sanitizeI18nName(attr.i18nBinding.replace(/{i18n>|}/g, ''));
-            return `${sanitizedName}=${attr.value.trim()}`.trim();
+            const sanitizedName = attr.i18nBinding.replace(/{i18n>|}/g, '');
+            return `${sanitizedName}=${attr.value}`;
         }).join('\n');
     }
 
@@ -91,3 +86,5 @@ class XMLi18nTranslator {
 
 // Export the class
 module.exports = XMLi18nTranslator;
+
+

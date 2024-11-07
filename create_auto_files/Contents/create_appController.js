@@ -8,9 +8,6 @@ module.exports = (fileName, appId) => {
           "sap/ui/core/routing/Router",
           "sap/ui/core/Fragment",
           "sap/ui/core/Configuration"
-
-      
-      
         ],
         function (Controller,
         UIComponent,
