@@ -1,6 +1,6 @@
 // content.js
 module.exports = (fileName, appId, isHelperFuns = false) => {
-  let parent = "sap/ui/core/mvc/Controller"
+  let parent = "\"sap/ui/core/mvc/Controller\""
   let isInit = ""
   let isModelDfulate = ""
   let getMainObj = ""

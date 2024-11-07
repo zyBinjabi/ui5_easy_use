@@ -1,6 +1,6 @@
 {
   "name": "ui5_easy_use",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
@@ -16,7 +16,19 @@
   "keywords": [
     "ui5",
     "sapui5",
-    "utility"
+    "utility",
+    "SAP UI5 app generator",
+    "UI5 application scaffolding",
+    "SAP Fiori development tool",
+    "UI5 easy setup",
+    "SAP UI5 page creation CLI",
+    "UI5 MVC generator",
+    "SAP UI5 CLI commands",
+    "UI5 app navigation setup",
+    "SAP Fiori CLI utility",
+    "UI5 theming and routing",
+    "Quick start SAP UI5 development",
+    "SAP UI5 modular app"
   ],
   "author": "ZYBinjabi",
   "license": "ISC",
