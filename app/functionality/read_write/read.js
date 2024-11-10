@@ -6,31 +6,26 @@ class FileManager {
         this.basePath = basePath;
     }
 
-    // 1. Return the contents of a current file
-    getFileContents(filePath) {
+    // 1. Return the Paths of a current file
+    getFilePath(filePath) {
         try {
-            const fullPath = path.join(this.basePath, filePath);
-            return fs.readFileSync(fullPath, 'utf-8');
+            return { [path.basename(filePath)]: path.join(this.basePath, filePath) };
         } catch (error) {
             console.error(`Error reading file at ${filePath}:`, error);
             return null;
         }
     }
 
-    // 2. Return the contents of both JS (Controller) and XML (View) files
-    getControllerAndViewContents(xmlFilePath) {
+    // 2. Return the Paths of both JS (Controller) and XML (View) files
+    getControllerAndViewPaths(xmlFilePath) {
         try {
             // Assuming the controller is in the same directory as the XML file
-            const xmlFullPath = path.join(this.basePath, xmlFilePath);
-            const controllerFileName = this.getControllerFileName(xmlFilePath);
-            const controllerFullPath = path.join(this.basePath, controllerFileName);
-
-            const xmlContents = fs.readFileSync(xmlFullPath, 'utf-8');
-            const jsContents = fs.readFileSync(controllerFullPath, 'utf-8');
+            const xmlFullPath = path.join(xmlFilePath, '');
+            const controllerFullPath = this.getControllerFileName(xmlFilePath);
 
             return {
-                xml: xmlContents,
-                js: jsContents
+                [path.basename(xmlFullPath)]: xmlFullPath,
+                [path.basename(controllerFullPath)]: controllerFullPath,
             };
         } catch (error) {
             console.error(`Error reading controller or view files:`, error);
@@ -46,24 +41,22 @@ class FileManager {
     }
 
 
-    // 3. Return all file contents in a folder (without subfolders)
-    getFolderFilesContents(folderPath) {
+    // 3. Return all file Paths in a folder (without subfolders)
+    getFolderFilesPaths(folderPath) {
         const fullPath = path.join(this.basePath, folderPath);
         const files = fs.readdirSync(fullPath);
+        const Paths = {};
 
-        const contents = {};
         files.forEach(file => {
             const filePath = path.join(fullPath, file);
-            if (fs.lstatSync(filePath).isFile()) {
-                contents[file] = fs.readFileSync(filePath, 'utf-8');
-            }
+            Paths[file] = filePath;
         });
 
-        return contents;
+        return Paths;
     }
 
-    // 4. Return all file contents in a folder, including subfolders
-    getFolderContentsWithSubfolders(folderPath) {
+    // 4. Return all file Paths in a folder, including subfolders
+    getFolderPathsWithSubfolders(folderPath) {
         const fullPath = path.join(this.basePath, folderPath);
         const result = {};
 
@@ -71,9 +64,9 @@ class FileManager {
             const items = fs.readdirSync(dirPath);
             items.forEach(item => {
                 const itemPath = path.join(dirPath, item);
-                if (fs.lstatSync(itemPath).isFile()) {
-                    parentObj[item] = fs.readFileSync(itemPath, 'utf-8');
-                } else if (fs.lstatSync(itemPath).isDirectory()) {
+                if (this.isFile(itemPath)) {
+                    parentObj[item] = itemPath;
+                } else if (this.isDirectory(itemPath)) {
                     parentObj[item] = {};
                     readDirectory(itemPath, parentObj[item]);
                 }
@@ -83,21 +76,25 @@ class FileManager {
         readDirectory(fullPath, result);
         return result;
     }
+
+    isFile(path) { return fs.lstatSync(path).isFile() }
+
+    isDirectory(path) { return fs.lstatSync(path).isDirectory() }
 }
 
 // Example usage:
-const fileManager = new FileManager('C:/Users/zybin/OneDrive/Desktop/UI5_Easy_Use');
+const fileManager = new FileManager('C:/Users/zybin/OneDrive/Desktop/UI5_Easy_Use/webapp/');
 
 // 1. Get the content of a specific file
-// console.log(fileManager.getFileContents('webapp/view/App.view.xml'));
+// console.log(fileManager.getFilePath('view/App.view.xml'));
 
-// // 2. Get the contents of the View and corresponding Controller
-// console.log(fileManager.getControllerAndViewContents('webapp/view/App.view.xml'));
+// // 2. Get the Paths of the View and corresponding Controller
+// console.log(fileManager.getControllerAndViewPaths('C:/Users/zybin/OneDrive/Desktop/UI5_Easy_Use/webapp/view/Home.view.xml'));
 
-// // 3. Get all files' contents in a specific folder
-// console.log(fileManager.getFolderFilesContents('webapp/view'));
+// // 3. Get all files' Paths in a specific folder
+console.log(fileManager.getFolderFilesPaths(''));
 
-// // 4. Get all files' contents in a folder, including subfolders
-// console.log(fileManager.getFolderContentsWithSubfolders('webapp/fragment'));
+// // 4. Get all files' Paths in a folder, including subfolders
+// console.log(fileManager.getFolderPathsWithSubfolders(''));
 
 module.exports = FileManager;

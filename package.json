@@ -1,13 +1,15 @@
 {
   "name": "ui5_easy_use",
-  "version": "1.3.2",
+  "version": "1.5.0",
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
     "c-mvc": "node create_auto_files/main.js",
+    "x": "node app/main.js",
     "t": "node create_auto_files/main2.js",
     "z": "node app/functionality/read_write/read.js",
-    "postinstall": "node auto_add_json.js"
+    "postinstall": "node auto_add_json.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
