@@ -4,7 +4,7 @@
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
-    "c-mvc": "node create_auto_files/main.js",
+    "c-mvc": "node node_modules/ui5_easy_use/create_auto_files/main.js",
     "x": "node app/main.js",
     "t": "node create_auto_files/main2.js",
     "z": "node app/functionality/read_write/read.js",
@@ -40,5 +40,11 @@
   "bugs": {
     "url": "https://github.com/zyBinjabi/ui5_easy_use/issues"
   },
-  "homepage": "https://github.com/zyBinjabi/ui5_easy_use#readme"
+  "homepage": "https://github.com/zyBinjabi/ui5_easy_use#readme",
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-obfuscator": "^3.5.1"
+  }
 }

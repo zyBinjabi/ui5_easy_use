@@ -7,3 +7,8 @@ const initAppMenu = {
         { name: 'Base Selection + Init', value: 'default', handler: () => console.log('Initializing with base selection...') },
     ]
 }
+
+
+
+
+module.exports = initAppMenu;

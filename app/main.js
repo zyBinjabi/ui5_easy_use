@@ -101,6 +101,10 @@ class CLIManager {
     }
 }
 
+// main.js (or any other file where you want to use initAppMenu)
+const initAppMenu = require('./commands/initAppMenu');
+
+
 // Menu configuration object
 const menuConfig = {
     main: {
@@ -125,6 +129,8 @@ const defaultOptions = [
     { name: 'Back', value: 'back' },
     { name: 'Exit', value: 'exit' }
 ];
+
+
 
 // Initialize and start the CLI
 const cli = new CLIManager(menuConfig, newMenuConfig, defaultOptions);
