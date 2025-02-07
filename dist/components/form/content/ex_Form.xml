@@ -1,0 +1,92 @@
+<mvc:View controllerName="${ez5.appName}.controller.GiftReception"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page id="page_id_ApprovalLevels">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <!-- Add the title here -->
+                    <Title text="Approval Levels" />
+                </contentLeft>
+                <contentRight>
+                    <!-- Add the button here -->
+                    <Button id="messagePopoverBtnId_" press=".handleMessagePopoverPress"
+                        ariaHasPopup="Dialog" visible="{=!!${message>/}.length}" text="Messages" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <form:Form id="formId" editable="true">
+                    <form:title>
+                        <core:Title text="Form" />
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+                            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+                            emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:formElements>
+                                <form:FormElement label="Employee Id">
+                                    <form:fields>
+
+                                        <Input value="{formModel>/EmployeeId}"
+                                            visible="{helperFormModel>/EmployeeId/visible}"
+                                            editable="{helperFormModel>/EmployeeId/editable}">
+                                            <layoutData>
+                                                <l:GridData span="XL1 L2 M2 S12" />
+                                            </layoutData>
+
+                                        </Input>
+
+                                        <Input id="inputEmployeeNameId"
+                                            value="{formModel>/EmployeeName}"
+                                            placeholder="Employee Name"
+                                            visible="{helperFormModel>/EmployeeName/visible}"
+                                            editable="{helperFormModel>/EmployeeName/editable}">
+                                            <layoutData>
+                                                <l:GridData span="XL4 L3 M3 S12" />
+                                            </layoutData>
+                                        </Input>
+
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Approval Levels">
+                                    <form:fields>
+                                        <Select selectedKey="{formModel>/Level}"
+                                            items="{localData>/Approvals}" forceSelection='false'>
+                                            <items>
+                                                <core:Item key="{localData>key}"
+                                                    text="{localData>text}" />
+                                            </items>
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="" />
+                                <form:FormElement>
+                                    <form:fields>
+                                        <Button text="Submit" type="Emphasized" press="onSubmit_">
+                                            <layoutData>
+                                                <l:GridData span="L5 M5 S5" />
+                                            </layoutData>
+                                        </Button>
+                                    </form:fields>
+                                </form:FormElement>
+
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </content>
+    </Page>
+
+</mvc:View>

@@ -1,0 +1,15 @@
+{
+  "navigation": [
+    {
+      "title": "Home",
+      "icon": "sap-icon://home",
+      "key": "RouteHome"
+    },
+    {
+      "title": "Sample",
+      "icon": "sap-icon://settings",
+      "key": "RouteSample"
+    }
+  ],
+  "AddtionNavigation": []
+}

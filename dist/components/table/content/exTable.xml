@@ -1,0 +1,69 @@
+<mvc:View controllerName="ui5easyuseapplay.controller.TablePage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page_id_TablePage" title="TablePage">
+        <content >
+            <VBox id="mainFormVboxId2">
+                <table:Table rows="{ path: 'tableModel>/',sorter: {path: 'tableModel>createdAt',descending: true } }" ariaLabelledBy="title" rowActionCount="1" id="tableId" rowSelectionChange="" class="sapUiSmallMargin sapUiShadow sapUiContentPadding sapUiRoundedBorder sapUiPageBackground">
+                    <table:extension>
+                        <OverflowToolbar style="Clear" visible="true">
+                            <Title text="table" />
+                            <ToolbarSpacer />
+                            <Button icon="sap-icon://synchronize" press="onRefreshTable" tooltip="refresh" />
+
+                            <Button tooltip="sort" icon="sap-icon://sort" press="handleSortButtonPressed" />
+                            <Button tooltip="filter" icon="sap-icon://filter" press="handleFilterButtonPressed" />
+                            <Button tooltip="group" icon="sap-icon://group-2" press="handleGroupButtonPressed" />
+
+                            <SearchField id="searchFielde" width="20%" placeholder="search" search="onSearch" />
+                        </OverflowToolbar>
+                    </table:extension>
+
+                    <table:columns>
+                        <table:Column width="50%">
+                            <Label text="employee_i" />
+                            <table:template>
+                                <Text text="{tableModel>EmployeeId}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="50%">
+                            <Label text="full_name" />
+                            <table:template>
+                                <Text text="{tableModel>FullName}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+
+                        <table:Column width="50%">
+                            <Label text="formemail}" />
+                            <table:template>
+                                <Text text="{tableModel>Email}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="50%">
+                            <Label text="createdAt" />
+                            <table:template>
+                                <Text text="{tableModel>createdAt}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                    </table:columns>
+
+                    <!-- Define Row Action Template -->
+                    <table:rowActionTemplate>
+                        <table:RowAction>
+                            <table:items>
+                                <table:RowActionItem type="Navigation" press=".handleActionPress" visible="{Available}" />
+                            </table:items>
+                        </table:RowAction>
+                    </table:rowActionTemplate>
+
+                </table:Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

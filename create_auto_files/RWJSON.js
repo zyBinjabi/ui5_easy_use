@@ -35,7 +35,7 @@ function writeJsonFile(filePath, data) {
   });
 }
 
-function updateModel(viewName, jsonData ) {
+function updateModel(viewName, jsonData) {
   let models = jsonData["sap.ui5"].models;
 
   // Check if the name already exists in the routes array
@@ -52,7 +52,7 @@ function updateModel(viewName, jsonData ) {
   return jsonData;
 }
 
-function updateRouting(viewName, jsonData ) {
+function updateRouting(viewName, jsonData) {
   let routing = jsonData["sap.ui5"].routing;
   let routes = routing.routes;
 
@@ -79,7 +79,7 @@ function updateRouting(viewName, jsonData ) {
   return jsonData;
 }
 
-function updateNavList(viewName, jsonData ) {
+function updateNavList(viewName, jsonData) {
   let navigation = jsonData["navigation"];
 
   // Check if the name already exists in the routes array
@@ -100,10 +100,10 @@ function updateNavList(viewName, jsonData ) {
 
 async function updateAndWriteJsonFile(viewName, manifestPath, filePathNav) {
   try {
-    if (viewName == "Home"){
+    if (viewName == "Home") {
       let jsonDataModel = await readJsonFile(manifestPath);
-      jsonDataModel = await updateModel(viewName, jsonDataModel );
-      const returnValueModel = await writeJsonFile(manifestPath, jsonDataModel);  
+      jsonDataModel = await updateModel(viewName, jsonDataModel);
+      const returnValueModel = await writeJsonFile(manifestPath, jsonDataModel);
     }
 
     let jsonDataRoute = await readJsonFile(manifestPath);
@@ -111,7 +111,7 @@ async function updateAndWriteJsonFile(viewName, manifestPath, filePathNav) {
     const returnValueRute = await writeJsonFile(manifestPath, jsonDataRoute);
 
     let jsonDataNav = await readJsonFile(filePathNav);
-    jsonDataNav = await updateNavList(viewName, jsonDataNav );
+    jsonDataNav = await updateNavList(viewName, jsonDataNav);
     const returnValueNav = await writeJsonFile(filePathNav, jsonDataNav);
 
     console.log('Finsh!....');

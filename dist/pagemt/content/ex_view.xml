@@ -1,0 +1,10 @@
+<mvc:View controllerName="${ez5.appName}.controller.${ez5.controllerName}"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="${ez5.controllerName}">
+
+        <content>
+        </content>
+    </Page>
+</mvc:View>

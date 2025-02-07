@@ -10,17 +10,23 @@ module.exports = (fileName, appId) => {
     <App id='App_id'>
         <tnt:ToolPage id="toolPage">
             <tnt:header>
-                <ff:ShellBar title="${appId}" secondTitle="" showMenuButton="true" homeIcon="./image/main_logo.png" homeIconTooltip="Main Logo" menuButtonPressed="onMenuButtonPress" showNotifications="true" notificationsPressed="" notificationsNumber="4" id="idImage">
-                    <ff:additionalContent>
-                        <OverflowToolbarButton press="onToggleTheme" tooltip="Switch Theme" icon="sap-icon://light-mode" id="themeToggleButton"/>
-                        <OverflowToolbarButton press="" tooltip="Start tour to understand the functionality" icon="sap-icon://learning-assistant"/>
-                    </ff:additionalContent>
-                    <ff:profile>
-                        <Avatar id='Avatar_id' initials="UI" />
-                    </ff:profile>
-                </ff:ShellBar>
+                <tnt:ToolHeader>
+                    <Button
+                        icon="sap-icon://menu"
+                        press="onMenuButtonPress"
+                    />
+                    <Title text="${appId} - UI5 Easy Use" />
+                    <!-- Add space between elements -->
+                    <ToolbarSpacer />
+
+                    <OverflowToolbarButton
+                        icon="sap-icon://light-mode"
+                        press="onToggleTheme"
+                        id="themeToggleButton"
+                    />
+                </tnt:ToolHeader>
             </tnt:header>
-    
+                
             <tnt:sideContent>
                 <core:Fragment fragmentName="${appId}.fragment.mainFragment.SideNavigation" type="XML" />
             </tnt:sideContent>

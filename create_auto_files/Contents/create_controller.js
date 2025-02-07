@@ -77,7 +77,7 @@ module.exports = (fileName, appId, isHelperFuns = false) => {
   }
 
 
-  let is
+  // let is
 
   return `sap.ui.define(
       [

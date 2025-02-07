@@ -1,0 +1,48 @@
+{
+    "Countries": [
+        {
+            "key": "0000000001",
+            "text": "Saudi Arabia"
+        },
+        {
+            "key": "0000000002",
+            "text": "Egypt"
+        },
+        {
+            "key": "0000000003",
+            "text": "United Arab Emirates"
+        },
+        {
+            "key": "0000000004",
+            "text": "Qatar"
+        },
+        {
+            "key": "0000000005",
+            "text": "Kuwait"
+        },
+        {
+            "key": "0000000006",
+            "text": "Bahrain"
+        },
+        {
+            "key": "0000000007",
+            "text": "Oman"
+        },
+        {
+            "key": "0000000008",
+            "text": "Jordan"
+        },
+        {
+            "key": "0000000009",
+            "text": "Lebanon"
+        },
+        {
+            "key": "0000000010",
+            "text": "Morocco"
+        },
+        {
+            "key": "0000000000",
+            "text": "Other"
+        }
+    ]
+}

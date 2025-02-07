@@ -1,0 +1,53 @@
+<mvc:View
+    controllerName="${ez5.appName}.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:ff="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+>
+    <App id='App_id'>
+        <tnt:ToolPage id="toolPage">
+            <tnt:header>
+                <tnt:ToolHeader>
+                    <Button
+                        icon="sap-icon://menu"
+                        press="onMenuButtonPress"
+                    />
+                    <Title text="ez5" />
+
+                    <!-- Add space between elements -->
+                    <ToolbarSpacer />
+
+                    <OverflowToolbarButton
+                        icon="sap-icon://light-mode"
+                        id="themeToggleButton"
+                        press="onToggleTheme"
+                    />
+
+                    <OverflowToolbarButton
+                        press="onChangeLanguage"
+                        tooltip="{i18n>app_change}"
+                        icon="sap-icon://world"
+                        id="languageChangeButton"
+                    />
+
+
+                </tnt:ToolHeader>
+            </tnt:header>
+
+            <tnt:sideContent>
+                <core:Fragment
+                    fragmentName="${ez5.appName}.fragment.SideNavigation"
+                    type="XML"
+                />
+            </tnt:sideContent>
+
+            <tnt:mainContents>
+                <NavContainer id="app" />
+            </tnt:mainContents>
+        </tnt:ToolPage>
+    </App>
+</mvc:View>

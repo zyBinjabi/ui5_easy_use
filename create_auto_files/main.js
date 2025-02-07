@@ -53,7 +53,7 @@ class FileManager {
         }
     }
 
-    async createFile(filePath, content, fileType, forceOverwrite = false) {
+    async createFile(filePath, content, fileType = 'File Type', forceOverwrite = false) {
         try {
             const fileExists = await fs.stat(filePath).catch(() => false);
 

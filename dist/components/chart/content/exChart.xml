@@ -1,0 +1,27 @@
+<mvc:View
+    controllerName="${ez5.appName}.controller.Dashboard"
+    xmlns:commons="sap.suite.ui.commons"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:l="sap.ui.layout"
+>
+    <ScrollContainer
+        width="100%"
+        height="100%"
+        vertical="true"
+        horizontal="true"
+        class="sapUiContentPadding"
+    >
+        <VBox
+            id="targetContainer"
+            fitContainer="true"
+            class="sapUiSmallMargin sapUiShadow sapUiContentPadding sapUiRoundedBorder sapUiPageBackground"
+        />
+
+    </ScrollContainer>
+</mvc:View>

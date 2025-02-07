@@ -1,3 +1,7 @@
 node_modules/
 webapp/
-app/
+appH/
+documents/
+mypackage/
+ez5tst/
+dist/

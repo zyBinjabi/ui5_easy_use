@@ -1,0 +1,10 @@
+{
+    "roles": {
+        "RouteHome": [
+            "normal"
+        ],
+        "RouteAdmin": [
+            "admin"
+        ]
+    }
+}

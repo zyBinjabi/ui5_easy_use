@@ -1,0 +1,187 @@
+<mvc:View controllerName="${ez5.appName}.controller.Sample"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+>
+    <Page id="SampleId"
+    >
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <!-- Add the title here -->
+                    <Title text="Sample" />
+                </contentLeft>
+                <contentRight>
+                    <!-- Add the button here -->
+                    <Button id="messagePopoverBtnId_" press=".handleMessagePopoverPress"
+                        ariaHasPopup="Dialog" visible="{=!!${message>/}.length}" text="Messages" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <form:Form id="formId" editable="true">
+                    <form:title>
+                        <core:Title text="Form" />
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+                            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+                            emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:formElements>
+                                <form:FormElement label="Employee Id">
+                                    <form:fields>
+
+                                        <Input value="{formModel>/EmployeeId}"
+                                            placeholder="ex. 31242.."
+                                            visible="{helperFormModel>/EmployeeId/visible}"
+                                            editable="{helperFormModel>/EmployeeId/editable}">
+                                            <layoutData>
+                                                <l:GridData span="XL1 L2 M2 S12" />
+                                            </layoutData>
+                                        </Input>
+
+                                        <Input id="inputEmployeeNameId"
+                                            value="{formModel>/EmployeeName}"
+                                            placeholder="ex. Zaid.."
+                                            visible="{helperFormModel>/EmployeeName/visible}"
+                                            editable="{helperFormModel>/EmployeeName/editable}">
+                                            <layoutData>
+                                                <l:GridData span="XL4 L3 M3 S12" />
+                                            </layoutData>
+                                        </Input>
+
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Email">
+                                    <Input value="{formModel>/Email}"
+                                        placeholder="ex. email.Gmail.com.."
+                                        visible="{helperFormModel>/Email/visible}"
+                                        editable="{helperFormModel>/Email/editable}">
+                                    </Input>
+                                </form:FormElement>
+
+                                <form:FormElement label="Countries">
+                                    <form:fields>
+                                        <Select selectedKey="{formModel>/Country}"
+                                            items="{localData>/Countries}" forceSelection='false'>
+                                            <items>
+                                                <core:Item key="{localData>key}"
+                                                    text="{localData>text}" />
+                                            </items>
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="" />
+                                <form:FormElement>
+                                    <form:fields>
+                                        <Button text="Submit" type="Emphasized" press="onSubmit_">
+                                            <layoutData>
+                                                <l:GridData span="L5 M5 S5" />
+                                            </layoutData>
+                                        </Button>
+                                    </form:fields>
+                                </form:FormElement>
+
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+
+            <VBox id="mainFormVboxId2">
+                <table:Table
+                    rows="{ path: 'tableModel>/',sorter: {path: 'tableModel>Country',descending: true } }"
+                    ariaLabelledBy="title" rowActionCount="1" id="tableId" rowSelectionChange=""
+                    class="sapUiSmallMargin sapUiShadow sapUiContentPadding sapUiRoundedBorder sapUiPageBackground">
+                    <table:extension>
+                        <OverflowToolbar style="Clear" visible="true">
+                            <Title text="Table" />
+                            <ToolbarSpacer />
+                            <Button icon="sap-icon://synchronize" press="onRefreshTable"
+                                tooltip="refresh" />
+
+                            <Button tooltip="sort" icon="sap-icon://sort"
+                                press="handleSortButtonPressed" />
+                            <Button tooltip="filter" icon="sap-icon://filter"
+                                press="handleFilterButtonPressed" />
+                            <Button tooltip="group" icon="sap-icon://group-2"
+                                press="handleGroupButtonPressed" />
+
+                            <SearchField id="searchFielde" width="20%" placeholder="search.."
+                                search="onSearch" />
+                        </OverflowToolbar>
+                    </table:extension>
+
+                    <table:columns>
+                        <table:Column width="50%">
+                            <Label text="Employee Id" />
+                            <table:template>
+                                <Text text="{tableModel>EmployeeId}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="50%">
+                            <Label text="Employee Name" />
+                            <table:template>
+                                <Text text="{tableModel>EmployeeName}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+
+                        <table:Column width="50%">
+                            <Label text="Email" />
+                            <table:template>
+                                <Text text="{tableModel>Email}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="50%">
+                            <Label text="Country" />
+                            <table:template>
+                                <Text text="{tableModel>Country}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+
+                    </table:columns>
+
+                    <!-- Define Row Action Template -->
+                    <table:rowActionTemplate>
+                        <table:RowAction>
+                            <table:items>
+                                <table:RowActionItem type="Navigation" press=".handleActionPress"
+                                    visible="{Available}" />
+                            </table:items>
+                        </table:RowAction>
+                    </table:rowActionTemplate>
+
+                </table:Table>
+            </VBox>
+
+            <ScrollContainer
+                width="100%"
+                height="100%"
+                vertical="true"
+                horizontal="true"
+                class=""
+            >
+                <VBox
+                    id="targetContainer"
+                    fitContainer="true"
+                    class="sapUiSmallMargin sapUiShadow sapUiContentPadding sapUiRoundedBorder sapUiPageBackground"
+                />
+
+            </ScrollContainer>
+        </content>
+    </Page>
+
+</mvc:View>

@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+    <List>
+        <items>
+            <!-- <StandardListItem
+                icon="sap-icon://customer-history"
+                title="{i18n>usermenu_recent_activities}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://activity-individual"
+                title="{i18n>usermenu_frequently_used}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://sys-find"
+                title="{i18n>usermenu_app_finder}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://action-settings"
+                title="{i18n>usermenu_settings}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://edit"
+                title="{i18n>usermenu_edit_home_page}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://email"
+                title="{i18n>usermenu_contact_support}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://hint"
+                title="{i18n>usermenu_about}"
+                type="Active"
+                press="onListItemPress"
+            />
+            <StandardListItem
+                icon="sap-icon://log"
+                title="{i18n>usermenu_sign_out}"
+                type="Active"
+                press="logout"
+            /> -->
+            <!-- New item added here -->
+            <!-- <StandardListItem
+                icon="sap-icon://edit"
+                title="{i18n>usermenu_changing_user_id}"
+                type="Active"
+                press="onNewItemPressChangingUserId"
+            /> -->
+
+            <CustomListItem />
+
+            <StandardListItem
+                id="NewItemId_"
+                title="{i18n>usermenu_new_item}"
+                type="Active"
+                press="NewItempress"
+            />
+
+            <CustomListItem>
+                <HBox>
+                    <VBox
+                        alignItems="Center"
+                        justifyContent="Center"
+                        width="100%"
+                    >
+                        <Input
+                            id="ChangingUserId_"
+                            placeholder="Enter User Id"
+                            valueLiveUpdate="true"
+                            submit="onNewItemSubmit"
+                        />
+
+                        <Button
+                            press="onToggleTheme"
+                            tooltip="{i18n>usermenu_switch_theme}"
+                            icon="sap-icon://light-mode"
+                            id="themeToggleButton_"
+                        />
+                    </VBox>
+                </HBox>
+            </CustomListItem>
+
+            <!-- <CustomListItem>
+                <HBox>
+                    <Input
+                        id="ChangingUserRole"
+                        placeholder="Enter User Role"
+                        valueLiveUpdate="true"
+                        submit="onNewItemSubmitRole"
+                    />
+                </HBox>
+            </CustomListItem> -->
+        </items>
+    </List>
+</core:FragmentDefinition>

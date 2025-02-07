@@ -1,0 +1,22 @@
+<mvc:View controllerName="${ez5.appName}.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="Home">
+
+        <content>
+            <VBox class="sapUiTinyMargin">
+                <l:HorizontalLayout id="TileContainerExpanded_" allowWrapping="true"
+                    content="{navList_tiles>/}" class="sapUiTinyMarginTopBottom">
+                    <GenericTile header="{navList_tiles>title}" press="press"
+                        class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                        sizeBehavior="{navList_tiles>sizeBehavior}">
+                        <TileContent footer="Nav to">
+                            <ImageContent src="{navList_tiles>icon}" />
+                        </TileContent>
+                    </GenericTile>
+                </l:HorizontalLayout>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

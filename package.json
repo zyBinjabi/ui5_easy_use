@@ -1,15 +1,18 @@
 {
   "name": "ui5_easy_use",
-  "version": "1.5.0",
+  "version": "2.1.6",
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
     "c-mvc": "node node_modules/ui5_easy_use/create_auto_files/main.js",
-    "x": "node app/main.js",
+    "m": "node appH/main.js",
+    "c": "node appH/core/main.js",
+    "z": "node appH/testFiles/XmlToJson.js",
     "t": "node create_auto_files/main2.js",
-    "z": "node app/functionality/read_write/read.js",
+    "q": "node mypackage/main.js",
     "postinstall": "node auto_add_json.js",
-    "build": "webpack"
+    "build": "webpack",
+    "ez5": "node node_modules/ui5_easy_use/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,11 +33,17 @@
     "SAP Fiori CLI utility",
     "UI5 theming and routing",
     "Quick start SAP UI5 development",
-    "SAP UI5 modular app"
+    "SAP UI5 modular app",
+    "SAP UI5 fast",
+    "SAP UI5 easy"
   ],
   "author": "ZYBinjabi",
   "license": "ISC",
   "dependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
+    "async_hooks": "^1.0.0",
+    "glob": "^11.0.1",
     "inquirer": "^12.0.0"
   },
   "bugs": {
@@ -42,9 +51,12 @@
   },
   "homepage": "https://github.com/zyBinjabi/ui5_easy_use#readme",
   "devDependencies": {
+    "@types/node": "^22.10.5",
+    "copy-webpack-plugin": "^12.0.2",
     "javascript-obfuscator": "^4.1.1",
+    "typescript": "^5.7.2",
     "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4",
+    "webpack-cli": "^6.0.1",
     "webpack-obfuscator": "^3.5.1"
   }
 }

@@ -1,0 +1,24 @@
+{
+    "sap.${ez5.appName}": {
+        "routing": {
+            "routes": [
+                {
+                    "name": "RouteHome",
+                    "pattern": "RouteHome",
+                    "target": [
+                        "TargetHome"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetHome": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Home",
+                    "viewName": "Home"
+                }
+            }
+        }
+    }
+}

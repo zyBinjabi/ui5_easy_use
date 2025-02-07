@@ -4,9 +4,9 @@ module.exports = (fileName, appId) => {
     xmlns="sap.tnt"
     xmlns:core="sap.ui.core"
 >
+    //selectedKey="{/selectedKey}" // put it inside SideNavigation and try to use it -_-
     <SideNavigation
         expanded="false"
-        selectedKey="{/selectedKey}"
         itemSelect="onItemSelect"
     >
         <NavigationList items="{

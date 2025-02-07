@@ -1,0 +1,9 @@
+{
+    "keys": [
+        "title",
+        "text",
+        "tooltip",
+        "placeholder",
+        "label"
+    ]
+}

@@ -1,18 +1,48 @@
-// webpack.config.js
 const path = require('path');
-const JavaScriptObfuscator = require('webpack-obfuscator');
+const fs = require('fs');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { getContentPaths } = require('./webpack_helper.js');
+
+// Define the `myPackageDir` pointing to your `mypackage` folder
+const myPackageDir = path.resolve(__dirname, 'mypackage');
+
+// Generate the dynamic patterns
+const contentFolders = getContentPaths(myPackageDir);
+console.log("contentFolders: ", contentFolders)
+
+const patterns = contentFolders.map(folder => ({
+    from: folder.path,
+    to: `${folder.name}/content`,
+    noErrorOnMissing: true,
+}));
 
 module.exports = {
-    entry: './app/main.js', // Entry point for your application
+    // Entry point for your application
+    entry: './mypackage/main.js',
+
+    // Output configuration
     output: {
-        filename: 'bundle.js', // Output bundled file name
-        path: path.resolve(__dirname, 'dist'), // Output directory
+        filename: 'bundle.js', // Name of the output file
+        path: path.resolve(__dirname, 'dist'), // Directory for the output
+        libraryTarget: 'commonjs2', // Ensures compatibility with Node.js
     },
-    mode: 'production', // Set to 'production' for minification and optimization
-    target: 'node', // For Node.js environment
+
+    // Optimization settings
+    optimization: {
+        minimize: false, // Disable minification for easier debugging
+    },
+
+    // Mode configuration (set to 'production' for optimized builds)
+    mode: 'production',
+
+    // Target environment
+    target: 'node', // Indicates the build is for a Node.js environment
+
+    // Plugins configuration
     plugins: [
-        new JavaScriptObfuscator({
-            rotateStringArray: true, // Adds extra obfuscation
-        }, [])
+        // Copy static files to the output directory
+        new CopyWebpackPlugin({
+            patterns: patterns,
+        }),
     ],
 };

@@ -1,0 +1,10 @@
+
+
+<ff:profile>
+    <Avatar
+        id='Avatar_id_'
+        initials="UI"
+        press="onPressAvatar"
+        visible="{= !${env>/isProduction} }"
+    />
+</ff:profile>
