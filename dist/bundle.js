@@ -9027,12 +9027,12 @@ const main_menuConfig = {
     main: {
         message: '\n-----------\nSelect your main action:',
         choices: [
-            { name: '## Create Init App ##', value: 'create_init_app', submenu: 'initAppMenu' },
-            { name: '## Add Page ##', value: 'create_vcr', submenu: 'pagemtMenu' },
+            { name: '## Create Init App 🌟 ##', value: 'create_init_app', submenu: 'initAppMenu' },
+            { name: '## Add Page 📄 ##', value: 'create_vcr', submenu: 'pagemtMenu' },
             // { name: '## Insert Components ##', value: 'insert_components', handler: () => console.log('Inserting components...') },
             // { name: '## Add Utility ##', value: 'add_utility', handler: () => console.log('Adding utility...') },
-            { name: '## Translate_i18n ##', value: 'translate_i18n', submenu: 'main_i18n' },
-            { name: '## Exit ##', value: 'exit' }
+            { name: '## Translate_i18n 🌐 ##', value: 'translate_i18n', submenu: 'main_i18n' },
+            { name: '## Exit ❌ ##', value: 'exit' }
         ]
     }
 };

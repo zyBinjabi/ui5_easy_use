@@ -1,6 +1,6 @@
 {
   "name": "ui5_easy_use",
-  "version": "2.1.6",
+  "version": "2.2.1",
   "description": "A utility package for UI5 projects",
   "main": "create_auto_files/main.js",
   "scripts": {
